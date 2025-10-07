@@ -8,4 +8,6 @@ source env/bin/activate
 
 pip install -r requirements.txt
 
+bash utils/scripts/projectStructure.sh
+
 python app.py

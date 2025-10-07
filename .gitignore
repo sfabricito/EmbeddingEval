@@ -1,8 +1,5 @@
 env
-data/clean
-data/csv
-data/embedding
-data/search
+data
 
 utils/__pycache__/
 utils/csv/__pycache__/
