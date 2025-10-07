@@ -11,7 +11,7 @@ load_dotenv()
 
 PROCESSED_DATA_DIRECTORY = os.getenv('PROCESSED_DATA_DIRECTORY')
 
-def openCSV(input_file, output_file, num_rows, progress_callback=None):
+def openCSV(input_file, output_file, num_rows, progressCallback=None):
     with open(input_file, mode='r', newline='', encoding='ISO-8859-1') as infile:
         reader = list(csv.reader(infile))
         header = reader[0]
@@ -32,16 +32,8 @@ def openCSV(input_file, output_file, num_rows, progress_callback=None):
                 if row_to_insert:
                     writer.writerow(row_to_insert)
 
-                if progress_callback:
-                    progress_callback(i + 1, total_rows)
-                    time.sleep(0.05) 
-
-
-def printProgress(current, total):
-    percent = (current / total) * 100
-    print(f"\rProcessing: {current}/{total} rows ({percent:.1f}%)", end="")
-    if current == total:
-        print()
+                if progressCallback:
+                    progressCallback(current=i + 1, total=total_rows)
 
 def joinNonEmpty(*args):
     return ", ".join(str(arg) for arg in args if arg not in [None, "", " "]).strip()
@@ -68,10 +60,10 @@ def formatRow(row, id):
     return result
 
 
-def processRawData(input_file, rows=10):
+def processRawData(input_file, rows=10, progressCallback=None):
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".csv")
     try:
-        openCSV(input_file, temp_file.name, rows, progress_callback=printProgress)
+        openCSV(input_file, temp_file.name, rows, progressCallback=progressCallback)
 
         os.makedirs(PROCESSED_DATA_DIRECTORY, exist_ok=True)
         output_file = f"{PROCESSED_DATA_DIRECTORY}/globalTerrorism_{rows}.parquet"

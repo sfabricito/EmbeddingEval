@@ -6,6 +6,8 @@ from utils.readFiles import readFiles
 from dotenv import load_dotenv
 from project.process_raw_data.app import processRawData
 
+from .shared.printProgress import printProgress
+
 load_dotenv()
 
 RAW_DATA_DIRECTORY = os.getenv("RAW_DATA_DIRECTORY")
@@ -46,8 +48,8 @@ def processRawDataMenu():
     executable(selectedFile, rows)
 
 
-def executable(file_path, rows):
-    processRawData(file_path, rows)
+def executable(filePath, rows):
+    processRawData(filePath, rows, printProgress)
     print("File processing completed.")
 
     time.sleep(2)
