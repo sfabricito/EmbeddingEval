@@ -1,57 +1,66 @@
-import curses
+#!/usr/bin/env python3
+import time
+from simple_term_menu import TerminalMenu
 
-from utils.logger import logger
-from menu.csv.app import csvMenu
-from menu.qdrant.app import qdrantMenu
-from menu.embeddings.app import embeddingMenu
+from .processRawData import processRawDataMenu
 
-from utils.tools.graphs import generateAllGraphs
 
-log = logger()
+class Prompt:
+    @staticmethod
+    def menu(options, title="Main Menu"):
+        terminal_menu = TerminalMenu(
+            options,
+            title=f"{title}\n",
+            menu_cursor="> ",
+            menu_cursor_style=("fg_red", "bold"),
+            menu_highlight_style=("standout",),
+            cycle_cursor=True,
+            clear_screen=True
+        )
+        menu_entry_index = terminal_menu.show()
+        if menu_entry_index is None:
+            return None
+        return options[menu_entry_index]
 
-def menu(stdscr):
-    log.info("Starting Menu")
-    curses.curs_set(0)
-    options = ["Clean CSV", "Generate Embeddings", "Qdrant", "Results", "Exit"]
-    selected = 0
-
-    while True:
-        stdscr.clear()
-        stdscr.addstr(0, 0, "Use arrow keys to navigate. Press ENTER to select.")
-        
-        for idx, option in enumerate(options):
-            if idx == selected:
-                stdscr.addstr(idx + 2, 2, f"> {option}", curses.A_REVERSE)
-            else:
-                stdscr.addstr(idx + 2, 2, f"  {option}")
-
-        key = stdscr.getch()
-
-        if key == curses.KEY_UP and selected > 0:
-            selected -= 1
-        elif key == curses.KEY_DOWN and selected < len(options) - 1:
-            selected += 1
-        elif key == ord("\n"):
-            if not handleOption(options[selected], stdscr):
+    @staticmethod
+    def dict_menu(dict_options, title=""):
+        while True:
+            selection = Prompt.menu(list(dict_options.keys()), title)
+            if selection is None or selection.lower() == "exit":
+                print("\nExiting menu...")
                 break
-            stdscr.clear()
-            stdscr.refresh()
+            selected_function = dict_options.get(selection)
+            if callable(selected_function):
+                selected_function()
+            else:
+                print("Invalid selection.")
 
 
-def handleOption(option: str, stdscr) -> bool:
-    if option == "Clean CSV":
-        log.info("Selected menu: Clean CSV")
-        csvMenu(stdscr)
+# === Actions === #
+def generate_embeddings():
+    print("Generating embeddings... (for example, using HuggingFace and Qdrant)")
+    time.sleep(2)
 
-    elif option == "Generate Embeddings":
-        log.info("Selected menu: Generate Embeddings")
-        embeddingMenu(stdscr)
-    elif option == "Qdrant":
-        log.info("Selected menu: Qdrant")
-        qdrantMenu(stdscr)
-    elif option == "Results":
-        log.info("Selected menu: Results")
-        generateAllGraphs()
-    elif option == "Exit":
-        return False
-    return True
+def Database():
+    print("Opening vector database... (connecting to Qdrant or MariaDB, etc.)")
+    time.sleep(2)
+
+def generate_charts():
+    print("Generating charts... (e.g., Matplotlib or Plotly)")
+    time.sleep(2)
+
+
+# === Main Menu === #
+def main():
+    options = {
+        "Process Raw Data": processRawDataMenu,
+        "Generate Embeddings": generate_embeddings,
+        "Database": Database,
+        "Generate Charts": generate_charts,
+        "Exit": None
+    }
+    Prompt.dict_menu(options, title="Embedding Evaluation Menu")
+
+
+if __name__ == "__main__":
+    main()

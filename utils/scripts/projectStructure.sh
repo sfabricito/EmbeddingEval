@@ -2,7 +2,7 @@
 
 DATA_DIR="data"
 
-SUBDIRS=("models" "raw_data" "processed_data" "embeddings" "queries" "synthetic_data" "charts")
+SUBDIRS=("models" "raw_data" "processed_data" "embeddings" "queries" "synthetic_data" "search_results" "charts")
 
 if [ ! -d "$DATA_DIR" ]; then
     echo "Directory '$DATA_DIR' does not exist. Creating..."

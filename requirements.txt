@@ -5,4 +5,5 @@ matplotlib
 fastparquet
 qdrant_client
 python-dotenv
+simple-term-menu
 sentence-transformers
