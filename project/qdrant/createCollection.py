@@ -9,7 +9,7 @@ log = logger()
 COLLECTION_NAME = os.getenv('COLLECTION_NAME')
 
 distances = {
-    'Cosine Similiarity': rest.Distance.COSINE,
+    'Cosine Similarity': rest.Distance.COSINE,
     'Euclidean Distance': rest.Distance.EUCLID,
     'Dot Product': rest.Distance.DOT,
     'Manhattan Distance': rest.Distance.MANHATTAN,

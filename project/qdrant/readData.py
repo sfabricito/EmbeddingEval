@@ -20,8 +20,7 @@ def apply_literal_eval(df, columns):
 def readData(filename):
     try:
         log.info(f'Reading rows from file {filename}')
-        parquet_file_path = f'./data/embedding/{filename}'
-        parquet_file = pq.ParquetFile(parquet_file_path)
+        parquet_file = pq.ParquetFile(filename)
 
         table = parquet_file.read()
         article_df = table.to_pandas()

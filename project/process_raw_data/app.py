@@ -5,7 +5,7 @@ import random
 import curses
 import tempfile
 from dotenv import load_dotenv
-from utils.convertCSVtoParquet import convertCSVtoParquet
+from utils.files.convertCSVtoParquet import convertCSVtoParquet
 
 load_dotenv()
 

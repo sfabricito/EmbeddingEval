@@ -12,7 +12,7 @@ log = logger()
 
 EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL')
 
-def manageData(qdrant, filename, synthetic_filename='./data/syntheticData/data.json'):
+def manageData(qdrant, filename, synthetic_filename='./data/synthetic_data/data.json'):
     try:
         log.info('Processing data for insert into Qdrant')
 

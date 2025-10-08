@@ -3,6 +3,7 @@ import time
 from simple_term_menu import TerminalMenu
 
 from .processRawData import processRawDataMenu
+from .databaseManagement.app import databaseManagementMenu
 from .embeddingsGeneration import embeddingsGeneration
 
 
@@ -54,7 +55,7 @@ def main():
     options = {
         "Process Raw Data": processRawDataMenu,
         "Generate Embeddings": embeddingsGeneration,
-        "Database": Database,
+        "Database": databaseManagementMenu,
         "Generate Charts": generate_charts,
         "Exit": None
     }
