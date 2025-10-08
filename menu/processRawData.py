@@ -1,12 +1,12 @@
 import os
 import time
 
-from simple_term_menu import TerminalMenu
-from utils.readFiles import readFiles
 from dotenv import load_dotenv
-from project.process_raw_data.app import processRawData
+from simple_term_menu import TerminalMenu
 
+from utils.readFiles import readFiles
 from .shared.printProgress import printProgress
+from project.process_raw_data.app import processRawData
 
 load_dotenv()
 

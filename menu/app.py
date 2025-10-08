@@ -3,6 +3,8 @@ import time
 from simple_term_menu import TerminalMenu
 
 from .processRawData import processRawDataMenu
+from .embeddingsGeneration import embeddingsGeneration
+
 
 
 class Prompt:
@@ -37,9 +39,6 @@ class Prompt:
 
 
 # === Actions === #
-def generate_embeddings():
-    print("Generating embeddings... (for example, using HuggingFace and Qdrant)")
-    time.sleep(2)
 
 def Database():
     print("Opening vector database... (connecting to Qdrant or MariaDB, etc.)")
@@ -54,7 +53,7 @@ def generate_charts():
 def main():
     options = {
         "Process Raw Data": processRawDataMenu,
-        "Generate Embeddings": generate_embeddings,
+        "Generate Embeddings": embeddingsGeneration,
         "Database": Database,
         "Generate Charts": generate_charts,
         "Exit": None

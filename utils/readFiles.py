@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-import sys
+import re
 
 def readFiles(directory, extension=None):
     if not os.path.isdir(directory):
@@ -16,4 +16,10 @@ def readFiles(directory, extension=None):
                     files_list.append(file_name)
             else:
                 files_list.append(file_name)
+
+    files_list.sort(key=extract_number)
     return files_list
+
+def extract_number(name):
+    match = re.search(r'(\d+)', name)
+    return int(match.group(1)) if match else float('inf')
