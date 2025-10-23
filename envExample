@@ -1,0 +1,21 @@
+# Qdrant
+QDRANT_HOST='localhost'
+QDRANT_PORT=6333
+
+COLLECTION_NAME='GlobalTerrorism'
+VECTOR_SIZE='384'
+BATCH_SIZE=100
+EMBEDDING_BATCH_SIZE=16
+
+EMBEDDING_MODEL='thenlper/gte-small'
+DISTANCE='Cosine Similarity'
+
+#Data locations
+RAW_DATA_DIRECTORY='data/raw_data'
+PROCESSED_DATA_DIRECTORY='data/processed_data'
+EMBEDDING_DIRECTORY='data/embeddings'
+CHARTS_DIRECTORY='data/charts'
+SEARCH_RESULTS_DIRECTORY='data/search_results'
+SYNTHETIC_DATA_DIRECTORY='data/synthetic_data'
+QUERIES_DATA_DIRECTORY='data/queries'
+MODELS_DATA='data/models/models.json'
